@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BITE BURGER</title>
+<style>
+:root{
+  --ink:#151515;
+  --cream:#f4ead8;
+  --paper:#fffaf1;
+  --accent:#e85d2a;
+  --muted:#766f66;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1100px,92vw);margin:auto}
+nav{
+  position:sticky;top:0;z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(255,250,241,.86);
+  border-bottom:1px solid rgba(21,21,21,.08);
+}
+.nav-inner{
+  height:68px;display:flex;align-items:center;justify-content:space-between
+}
+.logo{font-weight:900;letter-spacing:.08em}
+.nav-links{display:flex;gap:20px;font-size:14px}
+.hero{
+  min-height:88vh;
+  display:grid;place-items:center;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:40px;
+  align-items:center;
+  padding:56px 0 72px;
+}
+.kicker{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+h1{
+  margin:14px 0 18px;
+  font-size:clamp(56px,10vw,120px);
+  line-height:.85;
+  letter-spacing:-.06em;
+}
+.jp-copy{
+  font-size:clamp(28px,4vw,48px);
+  font-weight:900;
+  margin:8px 0 16px;
+}
+.lead{
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.8;
+  max-width:560px;
+}
+.cta-row{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{
+  padding:14px 20px;border-radius:999px;font-weight:800;
+  border:1px solid var(--ink);display:inline-block
+}
+.btn.primary{background:var(--ink);color:white}
+.visual{
+  position:relative;
+  aspect-ratio:1/1;
+  display:grid;place-items:center;
+}
+.blob{
+  position:absolute;inset:7%;
+  border-radius:34% 66% 61% 39% / 40% 39% 61% 60%;
+  background:linear-gradient(135deg,#f0d9b8,#f6efe4);
+  transform:rotate(-7deg);
+}
+.burger-svg{
+  position:relative;
+  width:86%;
+  filter:drop-shadow(0 28px 30px rgba(0,0,0,.18));
+}
+.badge{
+  position:absolute;right:0;bottom:9%;
+  background:var(--accent);color:white;
+  width:116px;height:116px;border-radius:50%;
+  display:grid;place-items:center;text-align:center;
+  font-weight:900;transform:rotate(8deg)
+}
+section{padding:88px 0}
+.section-title{
+  font-size:clamp(36px,6vw,72px);
+  margin:0 0 12px;
+  letter-spacing:-.04em;
+}
+.section-sub{color:var(--muted);margin-bottom:36px}
+.menu{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px
+}
+.card{
+  border:1px solid rgba(21,21,21,.1);
+  border-radius:24px;
+  padding:24px;
+  background:#fff;
+}
+.card h3{font-size:24px;margin:0 0 8px}
+.price{font-size:28px;font-weight:900;margin-top:18px}
+.pill{
+  display:inline-block;background:var(--cream);padding:7px 10px;border-radius:999px;
+  font-size:12px;font-weight:800;margin-bottom:16px
+}
+.story{
+  background:var(--ink);color:white;
+}
+.story-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center
+}
+.story p{color:#d8d3cb;line-height:1.9}
+.info{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:24px
+}
+.info-card{background:var(--cream);border-radius:28px;padding:30px}
+.info-card strong{font-size:20px}
+footer{padding:30px 0 50px;color:var(--muted);font-size:13px}
+@media(max-width:800px){
+  .nav-links{display:none}
+  .hero-grid,.story-grid,.info{grid-template-columns:1fr}
+  .hero-grid{padding-top:32px}
+  .visual{order:-1}
+  .menu{grid-template-columns:1fr}
+  section{padding:64px 0}
+  .badge{width:96px;height:96px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">BITE BURGER</div>
+    <div class="nav-links">
+      <a href="#menu">MENU</a>
+      <a href="#story">STORY</a>
+      <a href="#shop">SHOP</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">TOKYO / CRAFT BURGER / 100% BEEF</div>
+      <h1>BITE<br>BURGER</h1>
+      <div class="jp-copy">肉を、喰らえ。</div>
+      <p class="lead">
+        余計なことはしない。焼きたてのバンズ、香ばしいビーフ、
+        とろけるチーズ。シンプルだから、うまい。
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#menu">メニューを見る</a>
+        <a class="btn" href="#shop">店舗情報</a>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="blob"></div>
+      <svg class="burger-svg" viewBox="0 0 600 600" aria-label="burger illustration">
+        <ellipse cx="300" cy="520" rx="190" ry="36" fill="#000" opacity=".08"/>
+        <path d="M130 245 Q165 110 300 102 Q435 110 470 245Z" fill="#e8a54f"/>
+        <path d="M150 240 Q300 200 450 240" stroke="#f5d27d" stroke-width="18" fill="none" stroke-linecap="round"/>
+        <circle cx="215" cy="160" r="7" fill="#fff2c8"/>
+        <circle cx="270" cy="135" r="7" fill="#fff2c8"/>
+        <circle cx="340" cy="155" r="7" fill="#fff2c8"/>
+        <circle cx="395" cy="180" r="7" fill="#fff2c8"/>
+        <path d="M135 270 Q300 230 465 270 L445 310 Q300 340 155 310Z" fill="#5d9f3e"/>
+        <path d="M145 318 Q300 285 455 318 L440 370 Q300 392 160 370Z" fill="#efc34d"/>
+        <path d="M160 370 Q300 338 440 370 Q430 430 300 442 Q170 430 160 370Z" fill="#4b2616"/>
+        <path d="M155 440 Q300 420 445 440 Q430 500 300 510 Q170 500 155 440Z" fill="#df9a46"/>
+      </svg>
+      <div class="badge">BIG BITE<br>¥1,280</div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <h2 class="section-title">MENU</h2>
+    <div class="section-sub">今日は、どれにかぶりつく？</div>
+    <div class="menu">
+      <article class="card">
+        <span class="pill">No.1</span>
+        <h3>BIG BITE</h3>
+        <p>ダブルパティ、チェダー、オニオン、特製ソース。</p>
+        <div class="price">¥1,280</div>
+      </article>
+      <article class="card">
+        <span class="pill">CHEESE</span>
+        <h3>SMASH CHEESE</h3>
+        <p>カリッと焼いたパティと、とろける濃厚チーズ。</p>
+        <div class="price">¥1,080</div>
+      </article>
+      <article class="card">
+        <span class="pill">SPICY</span>
+        <h3>RED HOT</h3>
+        <p>ハラペーニョとスパイシーソース。クセになる辛さ。</p>
+        <div class="price">¥1,180</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="story">
+  <div class="wrap story-grid">
+    <div>
+      <h2 class="section-title">SIMPLE<br>IS BEST.</h2>
+    </div>
+    <div>
+      <p>
+        いい肉を、強火で焼く。焼きたてのバンズではさむ。
+        それだけで十分うまい。BITE BURGERは、
+        “ちゃんと腹が減るバーガー”を目指している。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="wrap">
+    <h2 class="section-title">SHOP</h2>
+    <div class="section-sub">架空店舗です。デモサイトとして制作しています。</div>
+    <div class="info">
+      <div class="info-card">
+        <strong>BITE BURGER SHIBUYA</strong>
+        <p>東京都渋谷区〇〇 1-2-3</p>
+        <p>OPEN 11:00 — 22:00</p>
+      </div>
+      <div class="info-card">
+        <strong>TAKE OUT OK</strong>
+        <p>店頭注文・テイクアウト対応。</p>
+        <p>※このサイト・店舗はAI制作のデモです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 BITE BURGER — AI generated demo landing page.</div>
+</footer>
+</body>
+</html>
