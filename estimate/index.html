@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>かんたん見積書メーカー | TAKEMOCHI LAB</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:#1d1d1d;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",sans-serif}.wrap{width:min(980px,94vw);margin:auto;padding:28px 0 48px}.head{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-bottom:22px}.tag{font-size:12px;font-weight:800;letter-spacing:.14em;color:#777}h1{margin:6px 0 0;font-size:clamp(30px,7vw,48px)}.card{background:#fff;border:1px solid #ddd;border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.05)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:800}.field input,.field textarea,.field select{width:100%;border:1px solid #ccc;border-radius:12px;padding:12px;font:inherit;background:#fff}.field textarea{min-height:80px;resize:vertical}.items{display:grid;gap:10px}.row{display:grid;grid-template-columns:2.2fr .7fr 1fr auto;gap:8px;align-items:end}.row .field{min-width:0}.remove{border:0;background:#eee;border-radius:10px;padding:12px 13px;font-weight:900;cursor:pointer}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:999px;padding:13px 18px;font-weight:900;cursor:pointer;background:#1d1d1d;color:white}.btn.secondary{background:#e9ebe2;color:#1d1d1d}.summary{margin-left:auto;width:min(360px,100%);display:grid;gap:8px}.sumrow{display:flex;justify-content:space-between;gap:16px}.sumrow.total{font-size:26px;font-weight:900;border-top:2px solid #222;padding-top:12px;margin-top:4px}.preview{background:white;border:1px solid #ddd;border-radius:24px;padding:28px}.preview h2{font-size:34px;margin:0 0 24px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}.to{font-size:22px;font-weight:900}.preview table{width:100%;border-collapse:collapse;margin:20px 0}.preview th,.preview td{border-bottom:1px solid #ddd;padding:10px 6px;text-align:left}.preview th:last-child,.preview td:last-child{text-align:right}.note{white-space:pre-wrap;line-height:1.7;color:#555}.small{font-size:12px;color:#888}.hide-print{display:block}@media(max-width:700px){.grid,.meta{grid-template-columns:1fr}.row{grid-template-columns:1fr 80px 110px auto}.preview{padding:20px}.preview h2{font-size:28px}}@media(max-width:520px){.row{grid-template-columns:1fr 1fr}.row .field:first-child{grid-column:1/-1}.remove{height:44px}}@media print{body{background:white}.hide-print,.card{display:none!important}.wrap{width:100%;padding:0}.preview{border:0;box-shadow:none;border-radius:0;padding:0}.small{display:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="head hide-print"><div><div class="tag">TAKEMOCHI LAB / WORK TOOL</div><h1>かんたん見積書メーカー 🧾</h1></div></div>
+<section class="card hide-print">
+<div class="grid">
+<div class="field"><label>宛名</label><input id="client" value="株式会社サンプル 御中"></div>
+<div class="field"><label>発行日</label><input id="date" type="date"></div>
+<div class="field"><label>見積番号</label><input id="number" value="EST-001"></div>
+<div class="field"><label>発行者</label><input id="issuer" value="たけもちLAB"></div>
+</div>
+</section>
+<section class="card hide-print">
+<div class="items" id="items"></div>
+<div class="actions"><button class="btn secondary" id="add">＋ 項目を追加</button></div>
+</section>
+<section class="card hide-print">
+<div class="grid">
+<div class="field"><label>消費税率</label><select id="tax"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></div>
+<div class="field"><label>備考</label><textarea id="memo">有効期限：発行日より30日間</textarea></div>
+</div>
+<div class="actions"><button class="btn" id="print">印刷 / PDF保存</button><button class="btn secondary" id="reset">リセット</button></div>
+</section>
+<section class="preview" id="preview">
+<h2>御見積書</h2>
+<div class="meta"><div><div class="small">お見積先</div><div class="to" id="pClient"></div></div><div><div><span class="small">発行日：</span><span id="pDate"></span></div><div><span class="small">見積番号：</span><span id="pNumber"></span></div><div><span class="small">発行者：</span><span id="pIssuer"></span></div></div></div>
+<table><thead><tr><th>内容</th><th>数量</th><th>単価</th><th>金額</th></tr></thead><tbody id="pItems"></tbody></table>
+<div class="summary"><div class="sumrow"><span>小計</span><strong id="subtotal"></strong></div><div class="sumrow"><span>消費税</span><strong id="taxAmount"></strong></div><div class="sumrow total"><span>合計</span><span id="total"></span></div></div>
+<h3>備考</h3><div class="note" id="pMemo"></div>
+<div class="small" style="margin-top:24px">※デモ用の簡易見積書メーカーです。</div>
+</section>
+</main>
+<script>
+const itemsEl=document.getElementById('items'),yen=n=>'¥'+Math.round(n).toLocaleString('ja-JP');
+function addRow(name='Webサイト制作',qty=1,price=50000){const row=document.createElement('div');row.className='row';row.innerHTML=`<div class="field"><label>項目</label><input class="name" value="${name}"></div><div class="field"><label>数量</label><input class="qty" type="number" min="0" step="1" value="${qty}"></div><div class="field"><label>単価</label><input class="price" type="number" min="0" step="100" value="${price}"></div><button class="remove" aria-label="削除">×</button>`;itemsEl.appendChild(row);row.querySelectorAll('input').forEach(i=>i.addEventListener('input',render));row.querySelector('.remove').onclick=()=>{row.remove();render()};render()}
+function render(){document.getElementById('pClient').textContent=document.getElementById('client').value;document.getElementById('pDate').textContent=document.getElementById('date').value||'-';document.getElementById('pNumber').textContent=document.getElementById('number').value;document.getElementById('pIssuer').textContent=document.getElementById('issuer').value;document.getElementById('pMemo').textContent=document.getElementById('memo').value;const tbody=document.getElementById('pItems');tbody.innerHTML='';let sub=0;document.querySelectorAll('.row').forEach(r=>{const n=r.querySelector('.name').value,q=Number(r.querySelector('.qty').value)||0,p=Number(r.querySelector('.price').value)||0,a=q*p;sub+=a;const tr=document.createElement('tr');tr.innerHTML=`<td>${n}</td><td>${q}</td><td>${yen(p)}</td><td>${yen(a)}</td>`;tbody.appendChild(tr)});const taxRate=Number(document.getElementById('tax').value)||0,t=Math.round(sub*taxRate/100);document.getElementById('subtotal').textContent=yen(sub);document.getElementById('taxAmount').textContent=yen(t);document.getElementById('total').textContent=yen(sub+t)}
+['client','date','number','issuer','memo','tax'].forEach(id=>document.getElementById(id).addEventListener('input',render));document.getElementById('add').onclick=()=>addRow('',1,0);document.getElementById('print').onclick=()=>window.print();document.getElementById('reset').onclick=()=>{itemsEl.innerHTML='';document.getElementById('client').value='株式会社サンプル 御中';document.getElementById('number').value='EST-001';document.getElementById('issuer').value='たけもちLAB';document.getElementById('memo').value='有効期限：発行日より30日間';document.getElementById('tax').value='10';addRow('Webサイト制作',1,50000);addRow('画像制作',3,5000);render()};document.getElementById('date').value=new Date().toISOString().slice(0,10);addRow('Webサイト制作',1,50000);addRow('画像制作',3,5000);render();
+</script>
+</body>
+</html>
